@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    internal interface IEmpleadoDAL : IDALGenerico<Empleado>
+    public interface IEmpleadoDAL : IDALGenerico<Empleado>
     {
     }
 }
