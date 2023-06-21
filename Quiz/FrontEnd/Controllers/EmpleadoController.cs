@@ -21,7 +21,10 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetById(id);
+
+            return View(empleado);
         }
 
         // GET: EmpleadoController/Create
@@ -33,10 +36,14 @@ namespace FrontEnd.Controllers
         // POST: EmpleadoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(EmpleadoViewModel empleado)
         {
             try
             {
+                empleadoHelper = new EmpleadoHelper();
+                empleado = empleadoHelper.Add(empleado);
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -48,16 +55,23 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetById(id);
+
+            return View(empleado);
         }
 
         // POST: EmpleadoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EmpleadoViewModel empleado)
         {
             try
             {
+                empleadoHelper = new EmpleadoHelper();
+                empleado = empleadoHelper.Edit(empleado);
+
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -69,16 +83,20 @@ namespace FrontEnd.Controllers
         // GET: EmpleadoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            empleadoHelper = new EmpleadoHelper();
+            EmpleadoViewModel empleado = empleadoHelper.GetById(id);
+            return View(empleado);
         }
 
         // POST: EmpleadoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(EmpleadoViewModel empleado)
         {
             try
             {
+                empleadoHelper = new EmpleadoHelper();
+                empleadoHelper.Delete(empleado.EmpleadoId);
                 return RedirectToAction(nameof(Index));
             }
             catch
