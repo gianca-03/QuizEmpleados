@@ -1,18 +1,22 @@
 ﻿using FrontEnd.Helpers;
 using FrontEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd.Controllers
 {
+    [Authorize]
     public class EmpleadoController : Controller
     {
+
         EmpleadoHelper empleadoHelper;
 
         // GET: EmpleadoController
         public ActionResult Index()
         {
-            empleadoHelper = new EmpleadoHelper();
+            var token = HttpContext.Session.GetString("token");
+            empleadoHelper = new EmpleadoHelper(token);
             List<EmpleadoViewModel> list = empleadoHelper.GetAll();
 
             return View(list);

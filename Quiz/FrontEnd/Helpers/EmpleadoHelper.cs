@@ -12,6 +12,11 @@ namespace FrontEnd.Helpers
             repository = new ServiceRepository();
         }
 
+        public EmpleadoHelper(string token)
+        {
+            repository = new ServiceRepository(token);
+        }
+
         public List<EmpleadoViewModel> GetAll()
         {
 

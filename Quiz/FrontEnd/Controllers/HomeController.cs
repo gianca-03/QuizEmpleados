@@ -1,11 +1,12 @@
-﻿using FrontEnd.Models;
+﻿using FrontEnd.Helpers;
+using FrontEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace FrontEnd.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,7 +17,7 @@ namespace FrontEnd.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
