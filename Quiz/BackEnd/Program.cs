@@ -1,4 +1,24 @@
+using BackEnd.Middleware;
+using Entities.Entities;
+using Entities.Utilities;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+#region Connection String
+builder.Services.AddDbContext<QuizContext>(options =>
+                        options.UseSqlServer(
+                            builder
+                            .Configuration
+                            .GetConnectionString("DefaultConnection")));
+
+string connString = builder
+                            .Configuration
+                            .GetConnectionString("DefaultConnection");
+
+Util.ConnectionString = connString;
+
+#endregion
 
 // Add services to the container.
 
@@ -15,6 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.UseAuthorization();
 
